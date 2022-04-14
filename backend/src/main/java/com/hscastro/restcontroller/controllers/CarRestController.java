@@ -2,6 +2,8 @@ package com.hscastro.restcontroller.controllers;
 
 import java.util.List;
 
+import javax.validation.constraints.Positive;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -35,8 +37,10 @@ public class CarRestController {
 
 	@GetMapping(params = {"minPrice", "maxPrice"}, value = "cars",
 			produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<Car>> getAllByPrice(@RequestParam(required = false) Double minPrice,
-			@RequestParam(required = false) Double maxPrice){
+	public ResponseEntity<List<Car>> getAllByPrice(
+			@RequestParam @Positive(message = "O parâmetro minPrice deve ser maior que zero") Double minPrice,
+			@RequestParam @Positive(message = "parâmetro maxPrice deve ser maior que zero") Double maxPrice){
+		
 		List<Car> listCars = this.carServiceImpl.getCarsWithPriceFilter(minPrice, maxPrice);
 		return ResponseEntity.ok(listCars);
 	}
