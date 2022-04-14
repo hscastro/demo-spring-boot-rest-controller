@@ -3,6 +3,10 @@ package com.hscastro.restcontroller.model;
 import java.io.Serializable;
 import java.util.Objects;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
+
 public class Car implements Serializable {
  
 	private static final long serialVersionUID = -5184759406307547167L;
@@ -12,6 +16,15 @@ public class Car implements Serializable {
     private String brand;
     private Integer horses;
     private Double price;
+    
+    //@NotNull annotation means that this field must not be null and it must be included in the request body.
+    //A anotação @NotNull significa que este campo não deve ser nulo e deve ser incluído no corpo da solicitação.
+    
+    //@NotEmpty: annotation means that this String field cannot be empty.
+    //anotação significa que este campo String não pode estar vazio.
+    
+    //@Positive means that this field must have a value greater than zero
+    //significa que este campo deve ter um valor maior que zero
     
     public Car() {
 		// TODO Auto-generated constructor stub
@@ -33,6 +46,8 @@ public class Car implements Serializable {
 		this.id = id;
 	}
 
+	@NotNull(message = "O modelo não pode ser nulo")
+	@NotEmpty(message = "O modelo deve ter valor")
 	public String getModel() {
 		return model;
 	}
@@ -41,6 +56,8 @@ public class Car implements Serializable {
 		this.model = model;
 	}
 
+	@NotNull(message = "Brand não pode ser nulo")
+	@NotEmpty(message = "Brand deve ter valor")
 	public String getBrand() {
 		return brand;
 	}
@@ -49,6 +66,8 @@ public class Car implements Serializable {
 		this.brand = brand;
 	}
 
+	@NotNull(message = "Os cavalos não devem ser nulos")
+	@Positive
 	public Integer getHorses() {
 		return horses;
 	}
@@ -57,6 +76,8 @@ public class Car implements Serializable {
 		this.horses = horses;
 	}
 
+	@NotNull(message = "O preço não pode ser nulo")
+	@Positive
 	public Double getPrice() {
 		return price;
 	}
