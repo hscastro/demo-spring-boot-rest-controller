@@ -2,6 +2,7 @@ package com.hscastro.restcontroller.controllers;
 
 import java.util.List;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,7 +53,7 @@ public class CarRestController {
 	}	
 	
 	@PostMapping
-	public ResponseEntity<Car> createCar(@RequestBody Car car){
+	public ResponseEntity<Car> createCar(@Valid @RequestBody Car car){
 		return ResponseEntity.ok(this.carServiceImpl.create(car));
 	}	
 	
